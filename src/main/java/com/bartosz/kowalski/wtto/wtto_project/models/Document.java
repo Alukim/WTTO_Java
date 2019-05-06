@@ -1,4 +1,4 @@
-package com.bartosz.kowalski.wtto.wtto_project.Models;
+package com.bartosz.kowalski.wtto.wtto_project.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class Document {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
 
     public long getId() {

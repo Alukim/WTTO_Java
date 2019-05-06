@@ -1,4 +1,4 @@
-package com.bartosz.kowalski.wtto.wtto_project.Controllers;
+package com.bartosz.kowalski.wtto.wtto_project.controllers;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

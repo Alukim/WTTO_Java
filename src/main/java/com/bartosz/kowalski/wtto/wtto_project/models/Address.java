@@ -1,9 +1,6 @@
-package com.bartosz.kowalski.wtto.wtto_project.Models;
+package com.bartosz.kowalski.wtto.wtto_project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Address {
@@ -20,6 +17,10 @@ public class Address {
     private final String addressLine;
     private final String city;
     private final String postCode;
+
+    @ManyToOne
+    @JoinColumn(name = "document_id")
+    private Document document;
 
     public long getId() {
         return id;
