@@ -21,8 +21,6 @@ public class Address {
     private final String city;
     private final String postCode;
 
-    private
-
     public long getId() {
         return id;
     }
