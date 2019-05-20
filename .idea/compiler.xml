@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="wtto_project" target="1.8" />
+      <module name="wtto_project" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

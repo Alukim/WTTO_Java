@@ -4,21 +4,21 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Document")
+@Table(name = "document")
 public class Document {
 
-    public Document(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "document",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<Address> addresses = new HashSet<>();
 
     public long getId() {
@@ -33,8 +33,25 @@ public class Document {
         return lastName;
     }
 
-    public void update(String firstName, String lastName) {
+    public Set<Address> getAddresses() {
+        return this.addresses;
+    }
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void addAddress(Address address) {
+        this.addresses.add(address);
+        address.setDocument(this);
+    }
+
+    public void removeAddress(Address address) {
+        this.addresses.remove(address);
+        address.setDocument(null);
     }
 }

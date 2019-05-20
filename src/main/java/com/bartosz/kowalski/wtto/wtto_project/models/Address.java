@@ -1,25 +1,22 @@
 package com.bartosz.kowalski.wtto.wtto_project.models;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity(name = "Address")
+@Table(name = "address")
 public class Address {
 
-    public Address(String addressLine, String city, String postCode) {
-        this.addressLine = addressLine;
-        this.city = city;
-        this.postCode = postCode;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private final String addressLine;
-    private final String city;
-    private final String postCode;
+    private String addressLine;
+    private String city;
+    private String postCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_id")
+    @JsonIgnore
     private Document document;
 
     public long getId() {
@@ -36,5 +33,25 @@ public class Address {
 
     public String getPostCode() {
         return postCode;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setAddressLine(String addressLine) {
+        this.addressLine = addressLine;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
     }
 }
