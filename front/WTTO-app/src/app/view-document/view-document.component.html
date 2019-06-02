@@ -1,0 +1,131 @@
+<div class="view-document-container">
+  <div class="details-container">
+    <mat-card>    
+      <mat-card-title>    
+          Document with ID: {{documentId}}
+      </mat-card-title>
+      <mat-card-content>    
+          <form [formGroup]="viewForm" (ngSubmit)="onUpdateDetailsSubmit()">    
+              <table>    
+                  <tr>    
+                      <td>    
+                          <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                              <input matInput #input maxlength="40" placeholder="First Name" [formControl]="firstName" required flex="100" (change)="onInputChange()" />
+                              <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+                              <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
+                          </mat-form-field>    
+                      </td>    
+                      <td>    
+                          <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                              <input matInput #input maxlength="40" placeholder="Last Name" [formControl]="lastName" required flex="100" (change)="onInputChange()" />
+                              <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+                              <mat-error *ngIf="lastName.invalid">{{getLastNameNameErrorMessage()}}</mat-error>
+                          </mat-form-field>    
+                      </td>    
+                  </tr>  
+                  <tr>
+                      <td colspan="2" class="content-center">    
+                          <button mat-raised-button color="accent" [disabled]="!detailsChanged">Update details</button>    
+                      </td>    
+                  </tr>    
+              </table>    
+          </form>    
+      </mat-card-content>    
+    </mat-card>   
+  </div>
+
+  <div class="addresses-container">
+    <mat-card>    
+      <mat-card-title>    
+          Addresses
+      </mat-card-title>    
+      <mat-card-content>    
+          <div class="table-container">
+              <mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="addressLine">
+                  <mat-header-cell *matHeaderCellDef> Address line </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.addressLine}}</mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="city">
+                    <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.city}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="postCode">
+                    <mat-header-cell *matHeaderCellDef> Post Code </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.postCode}}</mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="update">
+                  <mat-header-cell *matHeaderCellDef> Update </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="primary" (click)="onViewClicked(row.id, row.addressLine, row.city, row.postCode)">
+                      <mat-icon class="mat-18">reorder</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="remove">
+                  <mat-header-cell *matHeaderCellDef> Remove </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="warn" (click)="onDeletedClicked(row.id)">
+                      <mat-icon class="mat-18">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+          
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              </mat-table>
+            </div>
+      </mat-card-content>    
+    </mat-card>  
+  </div>
+  <div class="address-add-container">
+    <mat-card>    
+      <mat-card-title>    
+          Add new address
+      </mat-card-title>
+      <mat-card-content>    
+          <form [formGroup]="addressForm" (ngSubmit)="onAddressSubmit(formDirective)" #formDirective="ngForm">    
+              <table>    
+                  <tr>    
+                      <td>    
+                          <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                              <input matInput #input maxlength="40" placeholder="Address line" [formControl]="addressLine" required flex="100" />
+                              <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+                              <mat-error *ngIf="addressLine.invalid">{{getAddressLineErrorMessage()}}</mat-error>
+                          </mat-form-field>    
+                      </td>    
+                      <td>    
+                          <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                              <input matInput #input maxlength="40" placeholder="City" [formControl]="city" required flex="100" />
+                              <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+                              <mat-error *ngIf="city.invalid">{{getCityNameErrorMessage()}}</mat-error>
+                          </mat-form-field>    
+                      </td>
+                      <td>    
+                        <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                            <input matInput #input maxlength="40" placeholder="Post code" [formControl]="postCode" required flex="100" />
+                            <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+                            <mat-error *ngIf="postCode.invalid">{{getPostCodeNameErrorMessage()}}</mat-error>
+                        </mat-form-field>    
+                    </td>      
+                  </tr>  
+                  <tr>
+                      <td colspan="3" class="content-center">    
+                          <button mat-raised-button color="accent" [disabled]="!addressForm.valid">Add address</button>    
+                      </td>    
+                  </tr>    
+              </table>    
+          </form>    
+      </mat-card-content>    
+    </mat-card>   
+  </div>
+</div>

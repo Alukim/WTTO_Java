@@ -1,0 +1,34 @@
+<div class="new-document-container">
+    <mat-card>    
+        <mat-card-title>    
+            Create new document  
+        </mat-card-title>    
+        <mat-card-content>    
+            <form [formGroup]="createForm" (ngSubmit)="onSubmit()">    
+                <table>    
+                    <tr>    
+                        <td>    
+                            <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                                  <input matInput #inputFirstName maxlength="40" placeholder="First Name" [formControl]="firstNameForm" required flex="100" />
+                                  <mat-hint align="end">{{inputFirstName.value?.length || 0}}/40</mat-hint>
+                                  <mat-error *ngIf="firstNameForm.invalid">{{getFirstNameErrorMessage()}}</mat-error> 
+                            </mat-form-field>    
+                        </td>    
+                        <td>    
+                            <mat-form-field class="demo-full-width" hintLabel="Max 40 characters">    
+                                <input matInput #input maxlength="40" placeholder="Last Name" [formControl]="lastNameForm" required flex="100" />
+                                <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+                                <mat-error *ngIf="lastNameForm.invalid">{{getLastNameNameErrorMessage()}}</mat-error> 
+                            </mat-form-field>    
+                        </td>    
+                    </tr>  
+                    <tr>
+                        <td colspan="2" class="content-center">    
+                            <button mat-raised-button color="accent" [disabled]="!createForm.valid">Submit</button>    
+                        </td>    
+                    </tr>    
+                </table>    
+            </form>    
+        </mat-card-content>    
+    </mat-card>   
+</div>

@@ -16,17 +16,30 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <script type="text/javascript">
-        function submitform(){
+        function submitform() {
             alert("Sending Json");
             var formData = JSON.stringify($("#createDocumentForm").serializeArray());
+            console.log(formData);
+            fetch("/api/documents", {
+                method: 'post',
+                body: formData
+                })
+                .then(function(response) {
+                    alert("Created")
+                    console.log(response);
+                })
             $.ajax({
                 type: "POST",
                 url: "/api/documents",
                 data: formData,
-                success: function(){},
+                success: function () {
+                    alert("Sucessfull")
+                    location.href = "/";
+                },
                 dataType: "json",
-                contentType : "application/json"
+                contentType: "application/json"
             });
+        }
     </script>
 </head>
 <style>
@@ -57,7 +70,7 @@
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-4">
                     <h2 class="text-center">Create new document</h2>
-                    <form role="form" id="createDocumentForm" onsubmit="submitform()">
+                    <form role="form" id="createDocumentForm" method="post">
                         <div class="form-group">
                             <label for="form_name">Firstname *</label>
                             <input id="form_name" type="text" name="firstName" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
@@ -69,7 +82,7 @@
                             <div class="help-block with-errors"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="submit" class="btn btn-default" onclick="submitform()">Submit</button>
                     </form>
                 </div>
             </div>

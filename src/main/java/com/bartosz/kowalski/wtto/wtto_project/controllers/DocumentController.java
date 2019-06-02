@@ -117,6 +117,17 @@ public class DocumentController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity removeDocument(@PathVariable long id) {
+        Optional<Document> optionalDocument = documentRepository.findById(id);
+
+        if(!optionalDocument.isPresent())
+            throw new EntityNotFound(id);
+
+        documentRepository.delete(optionalDocument.get());
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/{id}/addresses/{addressId}")
     public ResponseEntity removeDocumentAddress(@PathVariable long id, @PathVariable long addressId) {
         documentRepository.findById(id).map(doc -> {
