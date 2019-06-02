@@ -1,6 +1,8 @@
 Bartosz Kowalski
 WTTO - Lab 5 - Spring boot
 
+Projekt: https://github.com/Alukim/WTTO_Java
+
 Aplikacja s³u¿y do dodawania / aktualizacji oraz usuwania dokumentów.
 
 Backend - Spring boot wraz z baz¹ danych H2:
