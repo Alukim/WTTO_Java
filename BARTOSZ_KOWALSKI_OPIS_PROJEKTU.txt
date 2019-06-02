@@ -1,0 +1,28 @@
+Bartosz Kowalski
+WTTO - Lab 5 - Spring boot
+
+Aplikacja s³u¿y do dodawania / aktualizacji oraz usuwania dokumentów.
+
+Backend - Spring boot wraz z baz¹ danych H2:
+domyœlny port: 8081
+
+localhost:8081/ -> redirect do localhost:8081/swagger-ui.html
+localhost:8081/swagger-ui.html -> SwaggerUI - dokumentacja API
+localhost:8081/console -> konsola H2 -> datasource: jdbc:h2:mem:test, user: sa, has³o: "BRAK_HAS£A"
+localhost:8081/api/document -> operacje na dokumencie (Pobierz listê, pobierz pojedynczy po Id, pobierz listê addressów dla podanego id dokumentu,
+dodaj dokument, aktualizuj g³owne dane dokumentu, usuñ dokument, dodaj address do dokumentu, aktualizuj address dokumentu, usuñ address dokumentu)
+
+Struktura bazy danych:
+
+Document : {id, firstName, lastName, Set<Address> addresses}
+Address: {id, addressLine, city, postCode, Document document}
+
+relacja 1 do Wielu
+
+Front - Angular
+domyslny port: 4200
+
+localhost:4200 -> redirect do localhost:4200/home
+localhost:4200/home -> widok listy wszystkich dokumentów (mo¿liwoœæ przejœcia do szczegó³ów/aktualizcji oraz usuniêcia pojedynczego dokumentu)
+localhost:4200/new -> widok dodanie nowego dokumentu
+localhost:4200/document/:id -> widok szczegó³ dokumentów wraz z mo¿liwoœci¹ aktualizacji g³ównych danych oraz aktualizacji adresów (dodanie, aktualizacja, usuniêcie)
